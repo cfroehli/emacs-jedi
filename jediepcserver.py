@@ -132,7 +132,7 @@ if JEDI_VERSION < pkg_resources.parse_version('0.16.0'):
     class JediScriptCompatWrapper:
         def __init__(self, code, path, **kwargs):
             self.source = code
-            self.source_path = str(path)
+            self.source_path = path
             self.kwargs = kwargs
 
         def complete(self, line, column):
