@@ -39,4 +39,4 @@ before_install:
   - make before-test
 
 script:
-  make travis-ci
+  - make travis-ci
