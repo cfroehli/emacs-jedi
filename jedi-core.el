@@ -714,15 +714,15 @@ See: https://github.com/tkf/emacs-jedi/issues/54"
   (substring-no-properties (or (buffer-file-name) "")))
 
 (defun jedi:call-deferred (method-name)
-  "Call ``Script(...).METHOD-NAME`` and return a deferred object."
+  "Call ``Script(...).METHOD-NAME(...)`` and return a deferred object."
   (let ((source      (buffer-substring-no-properties (point-min) (point-max)))
+        (source-path (jedi:-buffer-file-name))
         ;; line=0 is an error for jedi, but is possible for empty buffers.
         (line        (max 1 (count-lines (point-min) (min (1+ (point)) (point-max)))))
-        (column      (- (point) (line-beginning-position)))
-        (source-path (jedi:-buffer-file-name)))
+        (column      (- (point) (line-beginning-position))))
     (epc:call-deferred (jedi:get-epc)
                        method-name
-                       (list source line column source-path))))
+                       (list source source-path line column))))
 
 
 ;;; Completion

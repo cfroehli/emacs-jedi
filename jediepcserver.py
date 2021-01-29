@@ -217,14 +217,14 @@ class JediEPCHandler(object):
                 description=candidates_description(comp),
                 symbol=candidate_symbol(comp),
             )
-        source, line, column, source_path = args
+        source, source_path, line, column = args
         return [
             _wrap_completion_result(comp)
             for comp in self.jedi_script(source, source_path).complete(line, column)
         ]
 
     def get_in_function_call(self, *args):
-        source, line, column, source_path = args
+        source, source_path, line, column = args
         sig = self.jedi_script(source, source_path).get_signatures(line, column)
         call_def = sig[0] if sig else None
 
@@ -251,7 +251,7 @@ class JediEPCHandler(object):
         # `definitions` is a list. Each element is an instances of
         # `jedi.api_classes.BaseOutput` subclass, i.e.,
         # `jedi.api_classes.RelatedName` or `jedi.api_classes.Definition`.
-        source, line, column, source_path = args
+        source, source_path, line, column = args
         definitions = method(self.jedi_script(source, source_path), line, column)
         return [dict(
             column=d.column,
@@ -268,7 +268,7 @@ class JediEPCHandler(object):
         return self._goto(jedi.Script.get_references, *args)
 
     def get_definition(self, *args):
-        source, line, column, source_path = args
+        source, source_path, line, column = args
         definitions = self.jedi_script(source, source_path).infer(line, column)
         return [definition_to_dict(d) for d in definitions]
 
