@@ -137,31 +137,31 @@ if JEDI_VERSION < pkg_resources.parse_version('0.16.0'):
 
         def complete(self, line, column):
             return jedi.Script(self.source,
-                               self.line, self.column,
+                               line, column,
                                self.source_path,
                                **self.kwargs).completions()
 
         def get_signatures(self, line, column):
             return jedi.Script(self.source,
-                               self.line, self.column,
+                               line, column,
                                self.source_path,
                                **self.kwargs).call_signatures()
 
         def goto(self, line, column):
             return jedi.Script(self.source,
-                               self.line, self.column,
+                               line, column,
                                self.source_path,
                                **self.kwargs).goto_assignments()
 
         def get_references(self, line, column):
             return jedi.Script(self.source,
-                               self.line, self.column,
+                               line, column,
                                self.source_path,
                                **self.kwargs).usages()
 
         def infer(self, line, column):
             return jedi.Script(self.source,
-                               self.line, self.column,
+                               line, column,
                                self.source_path,
                                **self.kwargs).goto_definitions()
 
