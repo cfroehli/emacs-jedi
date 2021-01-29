@@ -357,7 +357,7 @@ def definition_to_short_dict(d):
     return dict(
         column=d.column,
         line_nr=d.line,
-        module_path=str(d.module_path) if d.module_path != '__builtin__' else [],
+        module_path=str(d.module_path) if d.module_path != '__builtin__' else '',
         module_name=d.module_name,
         description=d.description,
     )
