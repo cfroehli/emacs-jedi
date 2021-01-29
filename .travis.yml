@@ -12,7 +12,8 @@ python:
   - "3.5"
   - "2.7"
 env:
-  - EVM_EMACS=emacs-27.1-travis-linux-xenial
+  matrix:
+    - EVM_EMACS=emacs-27.1-travis-linux-xenial
   global:
     # Turn on --use-mirrors option everywhere (even in tox):
     - PIP_USE_MIRRORS=t
