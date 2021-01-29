@@ -9,6 +9,8 @@ python:
   - "3.9"
   - "3.8"
   - "3.6"
+  - "3.5"
+  - "2.7"
 env:
   matrix:
     - EVM_EMACS=emacs-26.3-travis-linux-xenial

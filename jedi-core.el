@@ -714,7 +714,7 @@ See: https://github.com/tkf/emacs-jedi/issues/54"
   (substring-no-properties (or (buffer-file-name) "")))
 
 (defun jedi:call-deferred (method-name)
-  "Call ``Script(...).METHOD-NAME(...)`` and return a deferred object."
+  "Call ``Script(...).METHOD-NAME()`` and return a deferred object."
   (let ((source      (buffer-substring-no-properties (point-min) (point-max)))
         (source-path (jedi:-buffer-file-name))
         ;; line=0 is an error for jedi, but is possible for empty buffers.
@@ -1028,13 +1028,13 @@ It must take these arguments: (file-to-read other-window-flag line_number column
                  initially (erase-buffer)
                  for def in reply
                  do (cl-destructuring-bind
-                        (&key doc desc_with_module &allow-other-keys)
+                        (&key doc full_name &allow-other-keys)
                         def
                       (unless (or (null doc) (equal doc ""))
                         (if first
                             (setq first nil)
                           (insert "\n\n---\n\n"))
-                        (insert "Docstring for " desc_with_module "\n\n" doc)
+                        (insert "Docstring for " full_name "\n\n" doc)
                         (setq has-doc t)))
                  finally do
                  (if (not has-doc)

@@ -101,14 +101,14 @@ json.load
 "
     (goto-char (1- (point-max)))
     (let ((reply (jedi-testing:sync (jedi:call-deferred 'get_definition))))
-      (destructuring-bind (&key doc desc_with_module line_nr column module_path
+      (destructuring-bind (&key doc line_nr column module_path
                                 full_name name type description)
           (car reply)
         (should (stringp doc))
-        (should (stringp desc_with_module))
         (should (integerp line_nr))
         (should (integerp column))
-        (should (stringp module_path))))))
+        (should (stringp module_path)
+        (should (stringp full_name)))))))
 
 (ert-deftest jedi:show-version-info ()
   (kill-buffer (get-buffer-create "*jedi:version*"))
@@ -296,7 +296,7 @@ if True:
       (search-forward "func(x)")
       (goto-char (match-beginning 0))
       (let ((reply (jedi-testing:sync (jedi:call-deferred 'get_definition))))
-        (destructuring-bind (&key doc desc_with_module line_nr column module_path
+        (destructuring-bind (&key doc line_nr column module_path
                                   full_name name type description)
             (car reply)
           (should (= line_nr def-line)))))))
